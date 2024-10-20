@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import * as AlertDialog from "@radix-ui/react-alert-dialog";
 
 export default function HeaderComponent() {
@@ -8,12 +9,15 @@ export default function HeaderComponent() {
         <h1 className="text-xl uppercase">Todolist of Bico</h1>
         <div>
           <ul className="flex gap-2">
-            <li className="cursor-pointer transition-colors duration-200 hover:text-blue-700">
+            <Link
+              className="cursor-pointer transition-colors duration-200 hover:text-blue-700"
+              href="/"
+            >
               Ver Anotações
-            </li>
-            <li className="cursor-pointer transition-colors duration-200 hover:text-blue-700">
+            </Link>
+            <Link className="cursor-pointer transition-colors duration-200 hover:text-blue-700" href="createnote">
               Criar Anotação
-            </li>
+            </Link>
             <AlertDialog.Root>
               <AlertDialog.Trigger asChild>
                 <li className="cursor-pointer transition-colors duration-200 hover:text-blue-700">

@@ -10,14 +10,19 @@ export default function MainComponent() {
   const { showNotes } = useLocal();
 
   useEffect(() => {
-    if (showNotes.length === 0) {
+    const notes = showNotes();
+    if (notes.length === 0) {
+      setWhithOutList(true);
+    } else {
+      console.log(notes);
+      setLists(notes);
       setWhithOutList(false);
     }
   }, []);
 
   return (
     <>
-      <main className="flex flex-col gap-3 items-center w-screen ">
+      <main className="flex flex-col gap-3 items-center w-screen h-[845px] ">
         <div className="w-[700px] border-b border-gray-600">
           <h1 className="text-3xl uppercase text-center mb-2">
             List de Tarefas
@@ -26,13 +31,14 @@ export default function MainComponent() {
         {withoutList ? (
           <p>Você ainda não criou nenhuma tarefa!</p>
         ) : (
-          <>
-            <div className="flex max-w-2xl items-center max-h-[48px] gap-2">
+          lists.map((task, index) => (
+            <div
+              className="flex max-w-2xl items-center max-h-[48px] gap-2"
+              key={index}
+            >
               <div className="flex flex-col gap-1">
-                <h2>Tarefa 1</h2>
-                <p>
-                  daskjgajgljalgkajglçkajlksajklajwlhgajhgakjghwkjhgakjhgkajhgskjhgakjh
-                </p>
+                <h2>{task.title}</h2>
+                <p>{task.description}</p>
               </div>
               <div className="flex h-[30px] pl-2 border-l border-white gap-1">
                 <button title="Editar">
@@ -46,7 +52,7 @@ export default function MainComponent() {
                 </button>
               </div>
             </div>
-          </>
+          ))
         )}
       </main>
     </>
