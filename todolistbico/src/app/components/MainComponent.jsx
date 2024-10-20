@@ -33,11 +33,11 @@ export default function MainComponent() {
         ) : (
           lists.map((task, index) => (
             <div
-              className="flex max-w-2xl items-center max-h-[48px] gap-2"
+              className="flex max-w-2xl min-w-[672px] bg-gray-700 items-center max-h-[48px] gap-2 shadow-md p-10 rounded-2xl justify-between" 
               key={index}
             >
               <div className="flex flex-col gap-1">
-                <h2>{task.title}</h2>
+                <h2 className="font-bold text-xl ml-">{task.title}</h2>
                 <p>{task.description}</p>
               </div>
               <div className="flex h-[30px] pl-2 border-l border-white gap-1">
