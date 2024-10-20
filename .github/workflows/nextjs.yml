@@ -70,4 +70,6 @@ jobs:
         with:
           path: |
             todolistbico/.next/cache
-          # Generate
+          key: ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-nextjs-
