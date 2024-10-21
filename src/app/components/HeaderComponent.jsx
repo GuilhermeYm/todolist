@@ -6,7 +6,7 @@ export default function HeaderComponent() {
   return (
     <>
       <header className="w-screen h-[50px] bg-gray-800 flex justify-between items-center px-3 mb-5">
-        <h1 className="text-xl uppercase">Todolist of Bico</h1>
+        <h1 className="text-xl uppercase"><Link href="/">Todolist of Bico</Link></h1>
         <div>
           <ul className="flex gap-2">
             <Link

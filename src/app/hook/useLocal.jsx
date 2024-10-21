@@ -13,7 +13,7 @@ export default function useLocal() {
           content: content,
         };
         localStorage.setItem("notes", JSON.stringify([dataNote]));
-        return true
+        return true;
       } else {
         // Já existe, então iremos adicionar mais uma anotação
         const existingNotes = JSON.parse(localStorage.getItem("notes"));
@@ -35,7 +35,6 @@ export default function useLocal() {
 
   // Função para listar todas as anotações
   const showNotes = () => {
-    console.log('Show Notes')
     // Verificando se o localStorage está vazio
     if (localStorage.getItem("notes") === null) {
       return [];
@@ -44,8 +43,25 @@ export default function useLocal() {
     }
   };
 
+  // Função para deletar uma tarefa
+  const deleteNote = (id) => {
+    try {
+      // Pegando todas as anotações do localStorage
+      const data = JSON.parse(localStorage.getItem("notes"));
+      // Objeto que não tem a anotação, na qual deve ser deletada
+      const newData = data.filter((note) => note.id === id);
+      // Colocando a nova lista de anotações no localStorage
+      localStorage.setItem("notes", JSON.stringify(newData));
+      return true;
+    } catch (err) {
+      console.error(err);
+      return false;
+    }
+  };
+
   return {
     createNote,
     showNotes,
+    deleteNote,
   };
 }
