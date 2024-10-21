@@ -1,4 +1,6 @@
 {
-  "/tasks/[idtask]/page": "app/tasks/[idtask]/page.js",
-  "/favicon.ico/route": "app/favicon.ico/route.js"
+  "/page": "app/page.js",
+  "/createnote/page": "app/createnote/page.js",
+  "/favicon.ico/route": "app/favicon.ico/route.js",
+  "/tasks/[idtask]/page": "app/tasks/[idtask]/page.js"
 }

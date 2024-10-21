@@ -3,7 +3,7 @@
 import HeaderComponent from "@/app/components/HeaderComponent";
 import { useState } from "react";
 import useLocal from "../hook/useLocal";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 export default function createnote() {
   const router = useRouter();

@@ -179,6 +179,78 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 
 eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   useLayoutEffect: () => (/* binding */ useLayoutEffect2)\n/* harmony export */ });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"(ssr)/./node_modules/next/dist/server/future/route-modules/app-page/vendored/ssr/react.js\");\n// packages/react/use-layout-effect/src/useLayoutEffect.tsx\n\nvar useLayoutEffect2 = Boolean(globalThis?.document) ? react__WEBPACK_IMPORTED_MODULE_0__.useLayoutEffect : () => {\n};\n\n//# sourceMappingURL=index.mjs.map\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiKHNzcikvLi9ub2RlX21vZHVsZXMvQHJhZGl4LXVpL3JlYWN0LXVzZS1sYXlvdXQtZWZmZWN0L2Rpc3QvaW5kZXgubWpzIiwibWFwcGluZ3MiOiI7Ozs7O0FBQUE7QUFDK0I7QUFDL0IsdURBQXVELGtEQUFxQjtBQUM1RTtBQUdFO0FBQ0YiLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly90b2RvbGlzdGJpY28vLi9ub2RlX21vZHVsZXMvQHJhZGl4LXVpL3JlYWN0LXVzZS1sYXlvdXQtZWZmZWN0L2Rpc3QvaW5kZXgubWpzP2U2ODEiXSwic291cmNlc0NvbnRlbnQiOlsiLy8gcGFja2FnZXMvcmVhY3QvdXNlLWxheW91dC1lZmZlY3Qvc3JjL3VzZUxheW91dEVmZmVjdC50c3hcbmltcG9ydCAqIGFzIFJlYWN0IGZyb20gXCJyZWFjdFwiO1xudmFyIHVzZUxheW91dEVmZmVjdDIgPSBCb29sZWFuKGdsb2JhbFRoaXM/LmRvY3VtZW50KSA/IFJlYWN0LnVzZUxheW91dEVmZmVjdCA6ICgpID0+IHtcbn07XG5leHBvcnQge1xuICB1c2VMYXlvdXRFZmZlY3QyIGFzIHVzZUxheW91dEVmZmVjdFxufTtcbi8vIyBzb3VyY2VNYXBwaW5nVVJMPWluZGV4Lm1qcy5tYXBcbiJdLCJuYW1lcyI6W10sInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///(ssr)/./node_modules/@radix-ui/react-use-layout-effect/dist/index.mjs\n");
 
+/***/ }),
+
+/***/ "(rsc)/./node_modules/@radix-ui/react-alert-dialog/dist/index.mjs":
+/*!******************************************************************!*\
+  !*** ./node_modules/@radix-ui/react-alert-dialog/dist/index.mjs ***!
+  \******************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Action: () => (/* binding */ e0),
+/* harmony export */   AlertDialog: () => (/* binding */ e1),
+/* harmony export */   AlertDialogAction: () => (/* binding */ e2),
+/* harmony export */   AlertDialogCancel: () => (/* binding */ e3),
+/* harmony export */   AlertDialogContent: () => (/* binding */ e4),
+/* harmony export */   AlertDialogDescription: () => (/* binding */ e5),
+/* harmony export */   AlertDialogOverlay: () => (/* binding */ e6),
+/* harmony export */   AlertDialogPortal: () => (/* binding */ e7),
+/* harmony export */   AlertDialogTitle: () => (/* binding */ e8),
+/* harmony export */   AlertDialogTrigger: () => (/* binding */ e9),
+/* harmony export */   Cancel: () => (/* binding */ e10),
+/* harmony export */   Content: () => (/* binding */ e11),
+/* harmony export */   Description: () => (/* binding */ e12),
+/* harmony export */   Overlay: () => (/* binding */ e13),
+/* harmony export */   Portal: () => (/* binding */ e14),
+/* harmony export */   Root: () => (/* binding */ e15),
+/* harmony export */   Title: () => (/* binding */ e16),
+/* harmony export */   Trigger: () => (/* binding */ e17),
+/* harmony export */   createAlertDialogScope: () => (/* binding */ e18)
+/* harmony export */ });
+/* harmony import */ var next_dist_build_webpack_loaders_next_flight_loader_module_proxy__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! next/dist/build/webpack/loaders/next-flight-loader/module-proxy */ "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-loader/module-proxy.js");
+
+
+const e0 = (0,next_dist_build_webpack_loaders_next_flight_loader_module_proxy__WEBPACK_IMPORTED_MODULE_0__.createProxy)(String.raw`D:\To-do\node_modules\@radix-ui\react-alert-dialog\dist\index.mjs#Action`);
+
+const e1 = (0,next_dist_build_webpack_loaders_next_flight_loader_module_proxy__WEBPACK_IMPORTED_MODULE_0__.createProxy)(String.raw`D:\To-do\node_modules\@radix-ui\react-alert-dialog\dist\index.mjs#AlertDialog`);
+
+const e2 = (0,next_dist_build_webpack_loaders_next_flight_loader_module_proxy__WEBPACK_IMPORTED_MODULE_0__.createProxy)(String.raw`D:\To-do\node_modules\@radix-ui\react-alert-dialog\dist\index.mjs#AlertDialogAction`);
+
+const e3 = (0,next_dist_build_webpack_loaders_next_flight_loader_module_proxy__WEBPACK_IMPORTED_MODULE_0__.createProxy)(String.raw`D:\To-do\node_modules\@radix-ui\react-alert-dialog\dist\index.mjs#AlertDialogCancel`);
+
+const e4 = (0,next_dist_build_webpack_loaders_next_flight_loader_module_proxy__WEBPACK_IMPORTED_MODULE_0__.createProxy)(String.raw`D:\To-do\node_modules\@radix-ui\react-alert-dialog\dist\index.mjs#AlertDialogContent`);
+
+const e5 = (0,next_dist_build_webpack_loaders_next_flight_loader_module_proxy__WEBPACK_IMPORTED_MODULE_0__.createProxy)(String.raw`D:\To-do\node_modules\@radix-ui\react-alert-dialog\dist\index.mjs#AlertDialogDescription`);
+
+const e6 = (0,next_dist_build_webpack_loaders_next_flight_loader_module_proxy__WEBPACK_IMPORTED_MODULE_0__.createProxy)(String.raw`D:\To-do\node_modules\@radix-ui\react-alert-dialog\dist\index.mjs#AlertDialogOverlay`);
+
+const e7 = (0,next_dist_build_webpack_loaders_next_flight_loader_module_proxy__WEBPACK_IMPORTED_MODULE_0__.createProxy)(String.raw`D:\To-do\node_modules\@radix-ui\react-alert-dialog\dist\index.mjs#AlertDialogPortal`);
+
+const e8 = (0,next_dist_build_webpack_loaders_next_flight_loader_module_proxy__WEBPACK_IMPORTED_MODULE_0__.createProxy)(String.raw`D:\To-do\node_modules\@radix-ui\react-alert-dialog\dist\index.mjs#AlertDialogTitle`);
+
+const e9 = (0,next_dist_build_webpack_loaders_next_flight_loader_module_proxy__WEBPACK_IMPORTED_MODULE_0__.createProxy)(String.raw`D:\To-do\node_modules\@radix-ui\react-alert-dialog\dist\index.mjs#AlertDialogTrigger`);
+
+const e10 = (0,next_dist_build_webpack_loaders_next_flight_loader_module_proxy__WEBPACK_IMPORTED_MODULE_0__.createProxy)(String.raw`D:\To-do\node_modules\@radix-ui\react-alert-dialog\dist\index.mjs#Cancel`);
+
+const e11 = (0,next_dist_build_webpack_loaders_next_flight_loader_module_proxy__WEBPACK_IMPORTED_MODULE_0__.createProxy)(String.raw`D:\To-do\node_modules\@radix-ui\react-alert-dialog\dist\index.mjs#Content`);
+
+const e12 = (0,next_dist_build_webpack_loaders_next_flight_loader_module_proxy__WEBPACK_IMPORTED_MODULE_0__.createProxy)(String.raw`D:\To-do\node_modules\@radix-ui\react-alert-dialog\dist\index.mjs#Description`);
+
+const e13 = (0,next_dist_build_webpack_loaders_next_flight_loader_module_proxy__WEBPACK_IMPORTED_MODULE_0__.createProxy)(String.raw`D:\To-do\node_modules\@radix-ui\react-alert-dialog\dist\index.mjs#Overlay`);
+
+const e14 = (0,next_dist_build_webpack_loaders_next_flight_loader_module_proxy__WEBPACK_IMPORTED_MODULE_0__.createProxy)(String.raw`D:\To-do\node_modules\@radix-ui\react-alert-dialog\dist\index.mjs#Portal`);
+
+const e15 = (0,next_dist_build_webpack_loaders_next_flight_loader_module_proxy__WEBPACK_IMPORTED_MODULE_0__.createProxy)(String.raw`D:\To-do\node_modules\@radix-ui\react-alert-dialog\dist\index.mjs#Root`);
+
+const e16 = (0,next_dist_build_webpack_loaders_next_flight_loader_module_proxy__WEBPACK_IMPORTED_MODULE_0__.createProxy)(String.raw`D:\To-do\node_modules\@radix-ui\react-alert-dialog\dist\index.mjs#Title`);
+
+const e17 = (0,next_dist_build_webpack_loaders_next_flight_loader_module_proxy__WEBPACK_IMPORTED_MODULE_0__.createProxy)(String.raw`D:\To-do\node_modules\@radix-ui\react-alert-dialog\dist\index.mjs#Trigger`);
+
+const e18 = (0,next_dist_build_webpack_loaders_next_flight_loader_module_proxy__WEBPACK_IMPORTED_MODULE_0__.createProxy)(String.raw`D:\To-do\node_modules\@radix-ui\react-alert-dialog\dist\index.mjs#createAlertDialogScope`);
+
+
 /***/ })
 
 };

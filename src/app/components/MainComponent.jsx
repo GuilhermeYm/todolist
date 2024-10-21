@@ -21,7 +21,7 @@ export default function MainComponent() {
   };
 
   const handleEdit = (id) => {
-    router.push(`tasks/edit${id}`);
+    router.push(`tasks/edittask/${id}`);
   };
 
   const handleSeeTask = (id) => {};
@@ -62,18 +62,24 @@ export default function MainComponent() {
               <div className="flex h-[30px] pl-2 border-l border-white gap-1">
                 <button title="Editar">
                   <FaEdit
-                    className="text-xl hover:text-red-600 transition-colors duration-200"
+                    className="text-xl hover:text-blue-600 transition-colors duration-200"
                     onClick={() => handleEdit(index)}
+                    title="Editar"
                   />
                 </button>
                 <button className="Deletar">
                   <FaDeleteLeft
                     className="text-xl hover:text-red-600 transition-colors duration-200"
                     onClick={() => handleDelete(index)}
+                    title="Deletar"
                   />
                 </button>
                 <button className="Concluir">
-                  <FaCircleCheck className="text-xl hover:text-red-600 transition-colors duration-200" />
+                  <FaCircleCheck
+                    className="text-xl hover:text-green-500 transition-colors duration-200"
+                    onClick={() => handleSucess(index)}
+                    title="Concluir"
+                  />
                 </button>
               </div>
             </div>
