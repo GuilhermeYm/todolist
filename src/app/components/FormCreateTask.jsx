@@ -1,16 +1,26 @@
-import { X } from "lucide-react";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import { useTasks } from "../context/TaskContext";
+import { X } from "lucide-react";
 
 const FormCreateTaskSchema = z.object({
-  title: z.string().min(3).max(50).nonempty(),
+  title: z
+    .string()
+    .min(3, "O título precisa ter no mínimo 3 caracteres.")
+    .max(50, "Título muito grande! Só pode ter 50 caracteres")
+    .nonempty()
+    .regex(
+      /^[a-zA-Z0-9\sáàâãéèêíïóôõöúçñÁÀÂÃÉÈÊÍÏÓÔÕÖÚÇÑ]*$/,
+      "O título só pode ter letras, números e espaços"
+    ),
   description: z.string().min(3).max(100).nonempty(),
-  status: z.enum(["active", "completed"]),
+  status: z.enum(["active", "completed", "onhuld", "abondoned"]),
 });
 
 export default function FormCreateTask() {
+  const { saveTask } = useTasks();
   const {
     handleSubmit,
     formState: { errors, isSubmitting },
@@ -18,9 +28,23 @@ export default function FormCreateTask() {
   } = useForm({
     resolver: zodResolver(FormCreateTaskSchema),
     mode: "onChange",
+    defaultValues: {
+      status: "active",
+    },
   });
 
-  const onSubmit = (data) => {};
+  const onSubmit = (data) => {
+    if (!data) {
+      return alert("Erro ao criar tarefa, tente novamente mais tarde");
+    }
+    const request = saveTask(data);
+    if (request === true) {
+      alert("Tarefa criada com sucesso!");
+      window.location.href = "/?showCreateTask=false";
+    } else {
+      return alert(request);
+    }
+  };
 
   return (
     <>
@@ -54,11 +78,14 @@ export default function FormCreateTask() {
               )}
             </div>
             <div className="space-y-2">
-              <label htmlFor="title" className="block font-medium text-2xl">
+              <label
+                htmlFor="description"
+                className="block font-medium text-2xl"
+              >
                 Descrição
               </label>
               <input
-                {...register("title")}
+                {...register("description")}
                 placeholder="Escreva a descrição da sua tarefa"
                 className="w-full rounded-lg border border-zinc-300 px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
               />
@@ -68,13 +95,38 @@ export default function FormCreateTask() {
                 </p>
               )}
             </div>
+            <div className="space-y-2">
+              <label htmlFor="status" className="block font-medium text-2xl">
+                Estado da tarefa
+              </label>
+              <select
+                defaultValue={""}
+                {...register("status")}
+                className="w-full rounded-lg border border-blue-500 outline-none transition-all px-2 py-2"
+              >
+                <option value="" disabled className="text-gray-500">
+                  Escolha uma opção para a sua tarefa
+                </option>
+                <option value="active">Desenvolvimento</option>
+                <option value="completed">Completa</option>
+                <option value="onhould">Pausada</option>
+                <option value="abounded">Abandonada</option>
+              </select>
+              <p className="text-gray-400 text-sm">
+                Se não escolher o estado da sua tarefa, como padrão ela estará
+                em <span>desenvolvimento/ativa</span>
+              </p>
+            </div>
             <div className="flex justify-end gap-3 pt-4 border-t border-zinc-200">
               <Link href={"/?showCreateTask=false"}>
                 <button className="bg-transparent border border-zinc-800 py-2 px-4 rounded-lg text-zinc-800 hover:bg-zinc-800 hover:text-white transition-colors duration-300 ease-in-out cursor-pointer">
                   Cancelar
                 </button>
               </Link>
-              <button className="border bg-blue-600 border-zinc-200 py-2 px-4 rounded-lg hover:bg-blue-700 text-white hover:border-zinc-900 transition-all duration-300 ease-in-out cursor-pointer" type="submit">
+              <button
+                className="border bg-blue-600 border-zinc-200 py-2 px-4 rounded-lg hover:bg-blue-700 text-white hover:border-zinc-900 transition-all duration-300 ease-in-out cursor-pointer"
+                type="submit"
+              >
                 Criar tarefa
               </button>
             </div>

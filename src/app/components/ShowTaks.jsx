@@ -8,13 +8,32 @@ import ModalCreateTask from "./ModalCreateTask";
 export default function ShowTaks() {
   const { tasks, setTasks } = useTasks();
   const [filter, setFilter] = useState("all");
+  const [filteredTasks, setFilteredTasks] = useState([]);
   const [withoutTaks, setWithoutTasks] = useState(true);
+
+  const applyFilter = (filterType) => {
+    switch (filterType) {
+      case "active":
+        setFilteredTasks(tasks.filter((task) => task.status === "active"));
+        break;
+      case "completed":
+        setFilteredTasks(tasks.filter((task) => task.status === "completed"));
+        break;
+      default:
+        console.log;
+        setFilteredTasks(tasks);
+        break;
+    }
+  };
 
   useEffect(() => {
     if (tasks.length !== 0) {
       setWithoutTasks(false);
+    } else {
+      setWithoutTasks(true);
     }
-  }, []);
+    applyFilter(filter);
+  }, [tasks, filter]);
 
   const deleteTask = (id) => {
     setTasks(tasks.filter((task) => task.id !== id));
@@ -94,12 +113,16 @@ export default function ShowTaks() {
             <div className="flex items-center">
               <input
                 type="checkbox"
-                checked={task.completed}
+                checked={filteredTasks.status === "completed" ? true : false}
                 onChange={() => toggleComplete(task.id)}
                 className="mr-3 h-5 w-5"
               />
               <span
-                className={task.completed ? "line-through text-gray-400" : ""}
+                className={
+                  task.status === "completed"
+                    ? "line-through text-gray-400"
+                    : ""
+                }
               >
                 {task.title}
               </span>
@@ -126,9 +149,9 @@ export default function ShowTaks() {
         ))
       )}
 
-      {tasks.length !== 0 && (
+      {tasks.length !== 0 && filter !== "completed" && (
         <div className="text-sm text-gray-500">
-          {tasks.filter((t) => !t.completed).length} tarefas restantes
+          {tasks.filter((t) => t.status === "active").length} tarefas restantes
         </div>
       )}
 

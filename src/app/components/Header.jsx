@@ -22,7 +22,7 @@ export default function Header() {
         >
           About
         </Link>
-        <Link href={"/"}>Criar tarefa</Link>
+        <Link href={"/?showCreateTask=true"}>Criar tarefa</Link>
       </nav>
     </header>
   );
