@@ -16,7 +16,7 @@ const FormCreateTaskSchema = z.object({
       "O título só pode ter letras, números e espaços"
     ),
   description: z.string().min(3).max(100).nonempty(),
-  status: z.enum(["active", "completed", "onhuld", "abondoned"]),
+  status: z.enum(["active", "completed", "onhuld"]),
 });
 
 export default function FormCreateTask() {
@@ -110,7 +110,6 @@ export default function FormCreateTask() {
                 <option value="active">Desenvolvimento</option>
                 <option value="completed">Completa</option>
                 <option value="onhould">Pausada</option>
-                <option value="abounded">Abandonada</option>
               </select>
               <p className="text-gray-400 text-sm">
                 Se não escolher o estado da sua tarefa, como padrão ela estará

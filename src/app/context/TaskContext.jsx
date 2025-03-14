@@ -69,8 +69,34 @@ export function TasksProvider({ children }) {
     }
   };
 
-  const getTasks = () => {
-    // Fazendo a lógica
+  const toggleStatusTask = (taskId, newValue) => {
+    try {
+      const findTask = tasks.find((task) => task.id === taskId);
+      if (!findTask) {
+        alert("Id da tarefa inválida");
+      }
+
+      const uppatedTasks = tasks.map((task) =>
+        task.id === taskId ? { ...task, status: newValue } : task
+      );
+
+      const taskData = localStorage.getItem("tasks");
+      const parsedData = JSON.parse(taskData);
+      const newObject = {
+        ...parsedData,
+        tasks: uppatedTasks,
+      };
+
+      localStorage.setItem("tasks", JSON.stringify(newObject));
+      setTasks(uppatedTasks);
+      return true;
+    } catch (err) {
+      console.error(err);
+      return "Erro ao tentar encontrar a tarefa", +err.message;
+    }
+  };
+
+  const deleteTask = (taskId) => {
     return;
   };
 
@@ -78,6 +104,7 @@ export function TasksProvider({ children }) {
     tasks,
     setTasks,
     saveTask,
+    toggleStatusTask,
   };
 
   return (

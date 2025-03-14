@@ -4,12 +4,14 @@ import { useEffect, useState } from "react";
 import { useTasks } from "../context/TaskContext";
 import Link from "next/link";
 import ModalCreateTask from "./ModalCreateTask";
+import { Pause, PlayCircle, Trash } from "lucide-react";
 
 export default function ShowTaks() {
-  const { tasks, setTasks } = useTasks();
+  const { tasks, setTasks, toggleStatusTask } = useTasks();
   const [filter, setFilter] = useState("all");
   const [filteredTasks, setFilteredTasks] = useState([]);
   const [withoutTaks, setWithoutTasks] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   const applyFilter = (filterType) => {
     switch (filterType) {
@@ -18,6 +20,9 @@ export default function ShowTaks() {
         break;
       case "completed":
         setFilteredTasks(tasks.filter((task) => task.status === "completed"));
+        break;
+      case "onhould":
+        setFilteredTasks(tasks.filter((task) => task.status === "onhould"));
         break;
       default:
         console.log;
@@ -37,6 +42,24 @@ export default function ShowTaks() {
 
   const deleteTask = (id) => {
     setTasks(tasks.filter((task) => task.id !== id));
+  };
+
+  const toggleStatus = (id, newValue) => {
+    try {
+      setIsLoading(true);
+      console.log("Carregando...");
+      const request = toggleStatusTask(id, newValue);
+      if (request === true) {
+        alert("Mudou");
+        console.log(request)
+      } else {
+        console.error(request);
+      }
+    } catch (err) {
+      console.log("Erro", err);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -91,6 +114,23 @@ export default function ShowTaks() {
         >
           Concluídas
         </button>
+        <button
+          disabled={withoutTaks}
+          className={`px-3 py-1 rounded cursor-pointer ${
+            withoutTaks && "!bg-gray-500 !text-white"
+          } ${
+            filter === "onhould" ? "bg-blue-500 text-white" : "bg-gray-200"
+          }`}
+          onClick={() => setFilter("onhould")}
+          title={
+            withoutTaks
+              ? "Você não tem tarefas, por isso botão está desabilitado"
+              : "Ver somente as tarefas pausadas"
+          }
+          aria-label="Mostrar somente as tarefas concluídas"
+        >
+          Pausadas
+        </button>
       </div>
       {tasks.length === 0 && withoutTaks ? (
         <div className="flex items-center justify-center w-full flex-col">
@@ -104,56 +144,78 @@ export default function ShowTaks() {
             Adicione uma! 🚀
           </Link>
         </div>
-      ) : (
+      ) : !isLoading ? (
         filteredTasks.map((task) => (
           <div
             key={task.id}
-            className="flex items-center justify-between bg-white p-4 rounded-lg shadow"
+            className="flex items-center justify-between bg-white p-4 rounded-lg shadow gap-4 min-w-xs"
           >
-            <div className="flex items-center">
-              <input
-                type="checkbox"
-                checked={filteredTasks.status === "completed" ? true : false}
-                onChange={() => toggleComplete(task.id)}
-                className="mr-3 h-5 w-5"
-              />
+            <div className="flex items-center gap-4">
+              <div className="flex gap-2">
+                <button
+                  className="cursor-pointer hover:text-blue-500 transition-colors duration-300 ease-in-out"
+                  onClick={() =>
+                    toggleStatus(
+                      task.id,
+                      task.status === "active" ? "onhould" : "active"
+                    )
+                  }
+                  title={
+                    task.status === "onhould"
+                      ? "Tarefa pausada. Clique novamente para despausar"
+                      : "Pausar tarefa"
+                  }
+                >
+                  <Pause size={20} />
+                </button>
+                <button
+                  className="cursor-pointer hover:text-green-500 transition-colors duration-300 ease-in-out"
+                  onClick={() =>
+                    toggleStatus(
+                      task.id,
+                      task.status === "completed" ? "active" : "completed"
+                    )
+                  }
+                  title={
+                    task.status === "completed"
+                      ? "Tarefa concluída. Clique novamente para não deixar a tarefa concluída"
+                      : "Concluir tarefa"
+                  }
+                >
+                  <PlayCircle size={20} />
+                </button>
+              </div>
               <span
-                className={
-                  task.status === "completed"
-                    ? "line-through text-gray-400"
-                    : ""
-                }
+                className={` ${
+                  task.status === "completed" ? "text-gray-400" : ""
+                } relative truncate`}
               >
                 {task.title}
+                {task.status === "completed" && (
+                  <span className="absolute left-0 right-0 top-1/2 h-0.5 bg-gray-400 transform animate-strike"></span>
+                )}
               </span>
             </div>
             <button
               onClick={() => deleteTask(task.id)}
-              className="text-red-500 hover:text-red-700"
+              className="text-red-500 hover:text-red-700 gap-2 flex items-center"
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                fill="currentColor"
-                viewBox="0 0 16 16"
-              >
-                <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
-                <path
-                  fillRule="evenodd"
-                  d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"
-                />
-              </svg>
+              <Trash size={20} />
+              Excluir
             </button>
           </div>
         ))
+      ) : (
+        <div>
+          <p>Carregando.....</p>
+        </div>
       )}
 
-      {tasks.length !== 0 && filter !== "completed" && (
+      {/* {tasks.length !== 0 && filter !== "completed" && (
         <div className="text-sm text-gray-500">
           {tasks.filter((t) => t.status === "active").length} tarefas restantes
         </div>
-      )}
+      )} */}
 
       <ModalCreateTask />
     </div>
