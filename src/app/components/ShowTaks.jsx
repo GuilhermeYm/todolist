@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useTasks } from "../context/TaskContext";
 import Link from "next/link";
 import ModalCreateTask from "./ModalCreateTask";
-import { Pause, PlayCircle, Trash } from "lucide-react";
+import { Pause, Play, Check, Trash } from "lucide-react";
 
 export default function ShowTaks() {
   const { tasks, setTasks, toggleStatusTask } = useTasks();
@@ -51,7 +51,7 @@ export default function ShowTaks() {
       const request = toggleStatusTask(id, newValue);
       if (request === true) {
         alert("Mudou");
-        console.log(request)
+        console.log(request);
       } else {
         console.error(request);
       }
@@ -118,9 +118,7 @@ export default function ShowTaks() {
           disabled={withoutTaks}
           className={`px-3 py-1 rounded cursor-pointer ${
             withoutTaks && "!bg-gray-500 !text-white"
-          } ${
-            filter === "onhould" ? "bg-blue-500 text-white" : "bg-gray-200"
-          }`}
+          } ${filter === "onhould" ? "bg-blue-500 text-white" : "bg-gray-200"}`}
           onClick={() => setFilter("onhould")}
           title={
             withoutTaks
@@ -148,12 +146,21 @@ export default function ShowTaks() {
         filteredTasks.map((task) => (
           <div
             key={task.id}
-            className="flex items-center justify-between bg-white p-4 rounded-lg shadow gap-4 min-w-xs"
+            className={`flex items-center justify-between  p-4 rounded-lg shadow gap-4 min-w-xs max-w-xs ${
+        task.status === "completed"
+          ? "bg-green-100"
+          : task.status === "onhould"
+          ? "bg-yellow-100"
+          : "bg-white"
+      }`}
+      title={task.status === "onhould" ? "Tarefa pausada" : task.status === "completed" ? "Tarefa concluída" : "Tarefa ativa"}
           >
             <div className="flex items-center gap-4">
-              <div className="flex gap-2">
+              <div className="flex gap-2  shrink-0">
                 <button
-                  className="cursor-pointer hover:text-blue-500 transition-colors duration-300 ease-in-out"
+                  className={`cursor-pointer hover:text-blue-500 transition-colors duration-300 ease-in-out ${
+                    task.status === "onhould" ? "text-blue-800" : ""
+                  }`}
                   onClick={() =>
                     toggleStatus(
                       task.id,
@@ -162,11 +169,20 @@ export default function ShowTaks() {
                   }
                   title={
                     task.status === "onhould"
-                      ? "Tarefa pausada. Clique novamente para despausar"
+                      ? "Tarefa pausada. Clique para retomar"
+                      : "Pausar tarefa"
+                  }
+                  aria-label={
+                    task.status === "onhould"
+                      ? "Retomar tarefa"
                       : "Pausar tarefa"
                   }
                 >
-                  <Pause size={20} />
+                  {task.status === "onhould" ? (
+                    <Play size={20} />
+                  ) : (
+                    <Pause size={20} />
+                  )}
                 </button>
                 <button
                   className="cursor-pointer hover:text-green-500 transition-colors duration-300 ease-in-out"
@@ -182,13 +198,17 @@ export default function ShowTaks() {
                       : "Concluir tarefa"
                   }
                 >
-                  <PlayCircle size={20} />
+                  {task.status === "completed" ? (
+                    <Check size={20} className="text-green-500" />
+                  ) : (
+                    <Check size={20} />
+                  )}
                 </button>
               </div>
               <span
                 className={` ${
                   task.status === "completed" ? "text-gray-400" : ""
-                } relative truncate`}
+                } relative truncate w-32`}
               >
                 {task.title}
                 {task.status === "completed" && (
@@ -196,18 +216,21 @@ export default function ShowTaks() {
                 )}
               </span>
             </div>
-            <button
-              onClick={() => deleteTask(task.id)}
-              className="text-red-500 hover:text-red-700 gap-2 flex items-center"
-            >
-              <Trash size={20} />
-              Excluir
-            </button>
+            <div className="flex shrink-0">
+              <button
+                onClick={() => deleteTask(task.id)}
+                className="text-red-500 hover:text-red-700 gap-2 flex items-center"
+              >
+                <Trash size={20} />
+                Excluir
+              </button>
+            </div>
           </div>
         ))
       ) : (
-        <div>
-          <p>Carregando.....</p>
+        <div className="flex items-center justify-center p-4">
+          <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-blue-500"></div>
+          <span className="ml-2">Carregando...</span>
         </div>
       )}
 
